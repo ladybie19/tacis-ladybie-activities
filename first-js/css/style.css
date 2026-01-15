@@ -1,0 +1,33 @@
+body {
+    background: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.box {
+    background: rgb(216, 191, 216);
+    padding: 20px;
+    width: 500px;
+    border: 0 0 10px #DB8FD8;
+}
+input {
+    width: 100%;
+    padding: 8px;
+    margin :8px  0;
+}
+button {
+    width: 100%;
+    padding: 8px;
+    background-color: #E6E6;
+    border: none;
+}
+
+.error {
+    color: aquamarine;
+    padding: 10px;
+    border: 2px rgb(216, 191, 216);
+    background-color:  #743636;
+    border-radius:5px;
+    visibility: hidden;
+}
