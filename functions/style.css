@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #a99de2, #b0a2eb);
+}
+
+.calculator {
+    width: 240px;
+    margin: 60px auto;
+    padding: 18px;
+    border-radius: 18px;
+    background: #d0c9ea;
+    box-shadow: 0 10px 25px rgba(88, 28, 135, 0.4);
+}
+
+.display {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+#valueBox {
+    width: 75%;
+    height: 60px;
+    font-size: 26px;
+    text-align: right;
+    padding: 10px;
+    background: #f5f3ff;
+    border-radius: 12px;
+    border: 2px solid #4d92db;
+    color: #69469d;
+}
+
+#operatorBox {
+    width: 25%;
+    height: 60px;
+    font-size: 26px;
+    text-align: center;
+    padding: 10px;
+    background: #ede9fe;
+    border-radius: 12px;
+    border: 2px solid #62c4c0;
+    color: #c3e0e5;
+    font-weight: bold;
+}
+
+
+.btn {
+    height: 46px;
+    width: 46px;
+    margin: 4px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    background: #9a78d6;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: #424bb3;
+    transform: scale(1.05);
+}
+
+.button {
+    height: 46px;
+    width: 98px;
+    margin: 4px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    background: #a855f7;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.button:hover {
+    background: #9333ea;
+    transform: scale(1.05);
+}

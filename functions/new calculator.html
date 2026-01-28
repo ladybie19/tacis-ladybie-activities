@@ -2,37 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
-     <script src="js/new calculator.js"></script>
+    <title>Violet Calculator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
 
-  <input type="text" id="display" disabled><br><br>
+<div class="calculator">
 
-  <button onclick="showValue('7')">7</button>
-  <button onclick="showValue('8')">8</button>
-  <button onclick="showValue('9')">9</button>
-  <button onclick="showValue('/')">/</button><br><br>
+    <div class="display">
+        <input type="text" id="valueBox" value="0" readonly>
+        <input type="text" id="operatorBox" value="" readonly>
+    </div>
 
-  <button onclick="showValue('4')">4</button>
-  <button onclick="showValue('5')">5</button>
-  <button onclick="showValue('6')">6</button>
-  <button onclick="showValue('*')">*</button><br><br>
+    <div class="buttons">
+        <button class="btn" onclick="appendNumber('7')">7</button>
+        <button class="btn" onclick="appendNumber('8')">8</button>
+        <button class="btn" onclick="appendNumber('9')">9</button>
+        <button class="btn" onclick="setOperator('/')">/</button><br>
 
-  <button onclick="showValue('1')">1</button>
-  <button onclick="showValue('2')">2</button>
-  <button onclick="showValue('3')">3</button>
-  <button onclick="showValue('-')">-</button><br><br>
+        <button class="btn" onclick="appendNumber('4')">4</button>
+        <button class="btn" onclick="appendNumber('5')">5</button>
+        <button class="btn" onclick="appendNumber('6')">6</button>
+        <button class="btn" onclick="setOperator('*')">*</button><br>
 
-  <button onclick="showValue('0')">0</button>
-  <button onclick="showValue('.')">.</button>
-  <button onclick="showResult('=')">=</button>
-  <button onclick="showValue('+')">+</button><br><br>
+        <button class="btn" onclick="appendNumber('1')">1</button>
+        <button class="btn" onclick="appendNumber('2')">2</button>
+        <button class="btn" onclick="appendNumber('3')">3</button>
+        <button class="btn" onclick="setOperator('-')">-</button><br>
 
-  <button onclick="clearDisplay()">AC</button>
-  <button onclick="clearDisplay('/')">C</button>
+        <button class="btn" onclick="appendNumber('0')">0</button>
+        <button class="btn" onclick="appendNumber('.')">.</button>
+        <button class="btn" onclick="calculate()">=</button>
+        <button class="btn" onclick="setOperator('+')">+</button><br>
+
+        <button class="button" onclick="clearAll()">AC</button>
+        <button class="button" onclick="backspace()">C</button>
+    </div>
+
+</div>
+<script src="./js/new calculator.js"></script>
 
 </body>
 </html>
