@@ -1,0 +1,107 @@
+/* ===== Body & Container ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #83acba;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #dde4e0;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Heading ===== */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* ===== Student Count ===== */
+#studentCount {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 16px;
+}
+
+/* ===== Table Styling ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Table header */
+table thead {
+    background-color: #4e73df;
+    color: #9defb0;
+}
+
+table thead th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Table body */
+table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #8981da;
+    color: #555;
+    font-size: 14px;
+}
+
+/* Hover effect */
+table tbody tr:hover {
+    background-color: #dbd6d6;
+}
+
+/* Zebra stripes */
+table tbody tr:nth-child(even) {
+    background-color: #e7dbdb;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table, table tbody, table tr, table td {
+        display: block;
+        width: 100%;
+    }
+
+    table tr {
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ddd;
+    }
+
+    table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: calc(50% - 30px);
+        text-align: left;
+        font-weight: bold;
+        color: #333;
+    }
+}

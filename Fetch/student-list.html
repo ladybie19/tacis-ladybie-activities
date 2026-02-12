@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student List</title>
+   <link rel="stylesheet" href="./css/student-syle.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Student List</h2>
+    <p id="studentCount"></p>
+
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Course</th>
+                <th>Year</th>
+                <th>Enrollment Date</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<script>
+async function loadStudents() {
+    try {
+        const response = await fetch('http://localhost/api/student-list.php');
+        const data = await response.json();
+
+        if (!data.success) {
+            alert("Failed to load students");
+            return;
+        }
+
+        document.getElementById("studentCount").textContent =
+            "Total Students: " + data.count;
+
+        const tableBody = document.querySelector("#studentTable tbody");
+        tableBody.innerHTML = "";
+
+        data.students.forEach(student => {
+            const row = `
+                <tr>
+                    <td>${student.id}</td>
+                    <td>${student.student_id}</td>
+                    <td>${student.first_name} ${student.last_name}</td>
+                    <td>${student.email}</td>
+                    <td>${student.course}</td>
+                    <td>${student.year_level}</td>
+                    <td>${student.enrollment_date}</td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+        });
+    } catch (error) {
+        console.error("Error loading students:", error);
+    }
+}
+
+loadStudents();
+</script>
+
+</body>
+</html>
