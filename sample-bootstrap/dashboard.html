@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom Style -->
+    <link href="bootstrap/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg px-4">
+    <a class="navbar-brand">Employee Info System</a>
+    <div class="ms-auto">
+        <a class="nav-link d-inline" href="employee-list.html">Employees</a>
+        <a class="nav-link d-inline" href="login.html">Logout</a>
+    </div>
+</nav>
+
+<div class="container mt-4">
+
+    <!-- STATS -->
+    <div class="row g-3">
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <h2>100</h2>
+                <p>Active Employees</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <h2>50</h2>
+                <p>Permanent</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <h2>30</h2>
+                <p>Temporary</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <h2>15</h2>
+                <p>Separated</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- RECENT ACTIVITIES -->
+    <div class="card mt-4 p-3">
+        <h5 class="mb-3">
+            <i class="bi bi-clock-history me-2 text-primary"></i>
+            Recent Activities
+        </h5>
+
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th width="60">Icon</th>
+                    <th>ID</th>
+                    <th>Activity</th>
+                    <th>Employee</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        <i class="bi bi-person-plus-fill text-success fs-5"></i>
+                    </td>
+                    <td>001</td>
+                    <td>Added New Employee</td>
+                    <td>Juan Dela Cruz</td>
+                    <td>2026-02-28</td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <i class="bi bi-pencil-square text-warning fs-5"></i>
+                    </td>
+                    <td>002</td>
+                    <td>Updated Employee Record</td>
+                    <td>Maria Santos</td>
+                    <td>2026-02-27</td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <i class="bi bi-mortarboard-fill text-primary fs-5"></i>
+                    </td>
+                    <td>003</td>
+                    <td>Added Training</td>
+                    <td>Juan Dela Cruz</td>
+                    <td>2026-02-26</td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <i class="bi bi-briefcase-fill text-info fs-5"></i>
+                    </td>
+                    <td>004</td>
+                    <td>Added Service Record</td>
+                    <td>Maria Santos</td>
+                    <td>2026-02-25</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

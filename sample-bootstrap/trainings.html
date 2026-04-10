@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Trainings</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom Style -->
+    <link href="bootstrap/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar px-4">
+    <a class="navbar-brand">Trainings</a>
+    <a class="nav-link" href="employee-info.html">Back</a>
+</nav>
+
+<div class="container mt-4">
+
+    <!-- HEADER -->
+    <div class="card p-4 mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">
+                <i class="bi bi-mortarboard-fill me-2 text-primary"></i>
+                Employee Training Records
+            </h5>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTrainingModal">
+                <i class="bi bi-plus-circle"></i> Add Training
+            </button>
+        </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="card p-3 mb-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search training...">
+    </div>
+
+    <!-- TABLE -->
+    <div class="card p-3">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Training Title</th>
+                    <th>Date</th>
+                    <th>Remarks</th>
+                    <th width="100" class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody id="trainingBody">
+                <tr>
+                    <td>1</td>
+                    <td>Leadership Development</td>
+                    <td>2024-02-10</td>
+                    <td>Completed</td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-danger" onclick="deleteTraining(this)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Workplace Ethics</td>
+                    <td>2024-05-18</td>
+                    <td>Completed</td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-danger" onclick="deleteTraining(this)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Customer Service Excellence</td>
+                    <td>2024-07-22</td>
+                    <td>Completed</td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-danger" onclick="deleteTraining(this)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Data Privacy Awareness</td>
+                    <td>2025-01-15</td>
+                    <td>Ongoing</td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-danger" onclick="deleteTraining(this)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>First Aid & Safety Training</td>
+                    <td>2025-03-05</td>
+                    <td>Scheduled</td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-danger" onclick="deleteTraining(this)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!-- ADD TRAINING MODAL -->
+<div class="modal fade" id="addTrainingModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-plus-circle me-2"></i>Add Training
+                </h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <input id="trainingTitle" class="form-control mb-3" placeholder="Training Title">
+                <input id="trainingDate" type="date" class="form-control mb-3">
+                <input id="trainingRemarks" class="form-control" placeholder="Remarks">
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary" onclick="addTraining()">Save</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+let trainingId = 6;
+
+function addTraining() {
+    let title = trainingTitle.value;
+    let date = trainingDate.value;
+    let remarks = trainingRemarks.value;
+
+    if (!title || !date || !remarks) {
+        alert("Please complete all fields");
+        return;
+    }
+
+    trainingBody.insertAdjacentHTML("beforeend", `
+        <tr>
+            <td>${trainingId++}</td>
+            <td>${title}</td>
+            <td>${date}</td>
+            <td>${remarks}</td>
+            <td class="text-center">
+                <button class="btn btn-sm btn-danger" onclick="deleteTraining(this)">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </td>
+        </tr>
+    `);
+
+    trainingTitle.value = "";
+    trainingDate.value = "";
+    trainingRemarks.value = "";
+
+    bootstrap.Modal.getInstance(addTrainingModal).hide();
+}
+
+function deleteTraining(btn) {
+    if (confirm("Delete this training record?")) {
+        btn.closest("tr").remove();
+    }
+}
+
+searchInput.addEventListener("keyup", () => {
+    const filter = searchInput.value.toLowerCase();
+    document.querySelectorAll("#trainingBody tr").forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(filter) ? "" : "none";
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee 10</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/style.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar px-4 py-3">
+    <span class="navbar-brand fw-bold">Employee Details</span>
+    <a href="employee-list.html">Back to List</a>
+</nav>
+
+<div class="container mt-4">
+    <div class="row g-4">
+
+        <!-- LEFT SIDE NAV -->
+        <div class="col-md-3">
+            <div class="side-nav">
+                <h6 class="fw-bold mb-3">Employee Records</h6>
+                <a href="trainings.html">📘 Trainings</a>
+                <a href="service-record.html">📄 Service Record</a>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="col-md-9">
+            <div class="card p-4">
+
+                <h4 class="fw-bold mb-4">Employee 10</h4>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label>Last Name</label>
+                        <input class="form-control editable" value="Dela Cruz" disabled>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>First Name</label>
+                        <input class="form-control editable" value="Juan" disabled>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Birthday</label>
+                        <input type="date" class="form-control editable" value="1995-04-12" disabled>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Status</label>
+                        <select class="form-control editable" disabled>
+                            <option selected>Active</option>
+                            <option>Permanent</option>
+                            <option>Temporary</option>
+                            <option>Separated</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div class="mt-4 d-flex gap-2">
+                    <button class="btn btn-primary" id="editBtn" onclick="enableEdit()">Edit</button>
+                    <button class="btn btn-success d-none" id="saveBtn" onclick="saveEdit()">Save</button>
+                    <button class="btn btn-secondary d-none" id="cancelBtn" onclick="cancelEdit()">Cancel</button>
+                    <button class="btn btn-danger ms-auto" onclick="deleteEmployee()">Delete</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+let originalValues = [];
+
+function enableEdit() {
+    const inputs = document.querySelectorAll('.editable');
+    originalValues = [];
+
+    inputs.forEach(input => {
+        originalValues.push(input.value);
+        input.disabled = false;
+    });
+
+    toggleButtons(true);
+}
+
+function saveEdit() {
+    document.querySelectorAll('.editable').forEach(input => input.disabled = true);
+    alert("Employee information updated");
+    toggleButtons(false);
+}
+
+function cancelEdit() {
+    const inputs = document.querySelectorAll('.editable');
+    inputs.forEach((input, index) => {
+        input.value = originalValues[index];
+        input.disabled = true;
+    });
+    toggleButtons(false);
+}
+
+function deleteEmployee() {
+    if (confirm("Are you sure you want to delete this employee?")) {
+        alert("Employee deleted");
+        window.location.href = "employee-list.html";
+    }
+}
+
+function toggleButtons(editing) {
+    document.getElementById('editBtn').classList.toggle('d-none', editing);
+    document.getElementById('saveBtn').classList.toggle('d-none', !editing);
+    document.getElementById('cancelBtn').classList.toggle('d-none', !editing);
+}
+</script>
+
+</body>
+</html>

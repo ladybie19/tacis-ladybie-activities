@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee List</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="bootstrap/css/style.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar px-4 py-3">
+    <span class="navbar-brand fw-bold">Employee Information System</span>
+    <a href="dashboard.html">Dashboard</a>
+</nav>
+
+<div class="container mt-4">
+
+    <!-- SEARCH + ADD -->
+    <div class="card p-3 mb-3">
+        <div class="d-flex gap-2">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search employee...">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#employeeModal">
+                <i class="bi bi-person-plus"></i> Add Employee
+            </button>
+        </div>
+    </div>
+
+    <!-- EMPLOYEE TABLE -->
+    <div class="card p-3">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Status</th>
+                    <th width="140" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="employeeBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ADD / EDIT MODAL -->
+<div class="modal fade" id="employeeModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Add Employee</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="editId">
+                <input id="lastName" class="form-control mb-2" placeholder="Last Name">
+                <input id="firstName" class="form-control mb-2" placeholder="First Name">
+                <select id="status" class="form-control">
+                    <option>Active</option>
+                    <option>Permanent</option>
+                    <option>Temporary</option>
+                    <option>Separated</option>
+                </select>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEmployee()">Save</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+let employees = JSON.parse(localStorage.getItem("employees")) || [
+    { id: 1, last: "Dela Cruz", first: "Juan", status: "Active" },
+    { id: 2, last: "Santos", first: "Maria", status: "Permanent" },
+    { id: 3, last: "Reyes", first: "Jose", status: "Temporary" },
+    { id: 4, last: "Garcia", first: "Ana", status: "Active" },
+    { id: 5, last: "Mendoza", first: "Paolo", status: "Separated" }
+];
+
+let idCounter = employees.length + 1;
+
+function saveToStorage() {
+    localStorage.setItem("employees", JSON.stringify(employees));
+}
+
+function renderEmployees() {
+    const body = document.getElementById("employeeBody");
+    body.innerHTML = "";
+
+    employees.forEach(emp => {
+        body.innerHTML += `
+            <tr>
+                <td>${emp.id}</td>
+                <td>${emp.last}</td>
+                <td>${emp.first}</td>
+                <td>${emp.status}</td>
+                <td class="text-center">
+                    <a href="employee-info.html" class="btn btn-primary btn-sm btn-icon">
+                        <i class="bi bi-eye"></i>
+                    </a>
+                    <button class="btn btn-warning btn-sm btn-icon" onclick="editEmployee(${emp.id})">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-icon" onclick="deleteEmployee(${emp.id})">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+function saveEmployee() {
+    const id = document.getElementById("editId").value;
+    const last = document.getElementById("lastName").value;
+    const first = document.getElementById("firstName").value;
+    const status = document.getElementById("status").value;
+
+    if (!last || !first) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    if (id) {
+        const emp = employees.find(e => e.id == id);
+        emp.last = last;
+        emp.first = first;
+        emp.status = status;
+    } else {
+        employees.push({ id: idCounter++, last, first, status });
+    }
+
+    saveToStorage();
+    renderEmployees();
+    bootstrap.Modal.getInstance(document.getElementById("employeeModal")).hide();
+    clearForm();
+}
+
+function editEmployee(id) {
+    const emp = employees.find(e => e.id === id);
+    document.getElementById("editId").value = emp.id;
+    document.getElementById("lastName").value = emp.last;
+    document.getElementById("firstName").value = emp.first;
+    document.getElementById("status").value = emp.status;
+    document.getElementById("modalTitle").textContent = "Edit Employee";
+
+    new bootstrap.Modal(document.getElementById("employeeModal")).show();
+}
+
+function deleteEmployee(id) {
+    if (confirm("Delete this employee?")) {
+        employees = employees.filter(e => e.id !== id);
+        saveToStorage();
+        renderEmployees();
+    }
+}
+
+function clearForm() {
+    document.getElementById("editId").value = "";
+    document.getElementById("lastName").value = "";
+    document.getElementById("firstName").value = "";
+    document.getElementById("status").value = "Active";
+    document.getElementById("modalTitle").textContent = "Add Employee";
+}
+
+document.getElementById("searchInput").addEventListener("keyup", function () {
+    const filter = this.value.toLowerCase();
+    document.querySelectorAll("#employeeBody tr").forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(filter) ? "" : "none";
+    });
+});
+
+renderEmployees();
+saveToStorage();
+</script>
+
+</body>
+</html>
